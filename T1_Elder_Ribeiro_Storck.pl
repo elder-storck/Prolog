@@ -1,7 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Trabalho 01 - Fazendo consultas no banco de dados dbpedia
-% LP Prolog , Programação Lógica
-%Autor : Elder Ribeiro Storck
+% Autor : Elder Ribeiro Storck, 	
+% git	: https://github.com/elder-storck
+% LP 	: Prolog , Programação Lógica.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 :- data_source(
    dbpedia_televisionShow,
@@ -83,3 +84,4 @@ dateOfBirth_before(Actor, Year) :- name_and_birthDate_Actor(Actor, date(A, B, C)
 %verifica se um determinado artista nasceu antes de um Ano
 %true 	dateOfBirth_before("Crispin Glover",1965)
 %false 	dateOfBirth_before("Crispin Glover",1964)
+
