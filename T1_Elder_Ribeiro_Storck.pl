@@ -66,6 +66,19 @@ coworker_dir_Prod(Director1, Director2) :- director_and_producer(Director1, P), 
 %verifica se um determinado artista nasceu antes de um Ano
 dateOfBirth_before(Actor, Year) :- name_and_birthDate_Actor(Actor, date(A, B, C)), A < Year, B > 0, C>0.
 
+%verifica quantidade de artitas trabalham em uma produtora
+amountActorbyNetwork(Network1, Count) :- distinct([Network1], (producerCast(_, Network1))), aggregate_all(count, (producerCast(_, Network1)), Count).
+
+%verifica qual produtora tem mais artistas 
+maiorNubAtoresPorProdutora( HX, HY) :-
+    setof( Y-X, amountActorbyNetwork(X,Y), S ),  % Cria uma conjunto/lista S ordenado-crescente com base em Y (Y-X)
+    reverse(S, [ HY-HX | _ ]). % Inverte o resultado de S e unifica o header com o HX e HY
+
+%verifica qual produtora tem Menos artistas 
+menorNubAtoresPorProdutora( LX, LY) :-
+    setof( Y-X, amountActorbyNetwork(X,Y), [ LY-LX | _ ] ).  % Cria uma conjunto/lista ordenado-crescente com base em Y (Y-X)
+% unifica o header com o LX e LY
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Exemplos de Consulta %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -85,3 +98,11 @@ dateOfBirth_before(Actor, Year) :- name_and_birthDate_Actor(Actor, date(A, B, C)
 %true 	dateOfBirth_before("Crispin Glover",1965)
 %false 	dateOfBirth_before("Crispin Glover",1964)
 
+%verifica quantidade de artitas trabalham em uma produtora
+%amountActorbyNetwork("Canal+", Count)
+
+%verifica qual produtora tem mais artistas 
+%maiorNubAtoresPorProdutora( HX, HY)
+
+%verifica qual produtora tem Menos artistas 
+%menorNubAtoresPorProdutora( LX, LY)
